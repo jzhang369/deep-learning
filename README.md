@@ -81,3 +81,28 @@ print(tensor)
 
 print(tensor.T) # matrix transpose
 ```
+
+
+# Data Preprocessing
+
+Import and load CSV data
+
+```python
+import pandas as pd
+import torch
+
+data = pd.read_csv(data_file)
+print(data)
+
+inputs, targets = data.iloc[:, 0:2], data.iloc[:, 2]
+
+print(inputs)
+
+
+#transfer the pandas data into pytorch tensor's formats
+X, y = torch.tensor(inputs.values), torch.tensor(targets.values)
+print(X)
+print(y)
+
+
+```
