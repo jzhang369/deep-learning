@@ -56,6 +56,31 @@ print(f"Zeros Tensor: \n {zeros_tensor} \n")
 
 This program creates three 3D tensors, where each tensor is a 4*3*2 matrix. For interpretation, it is easier, at least for me, to understand the matrix from the lowest dimension (i.e., from 2, to 3, and to 4, meaning 2 columns, 3 rows, and 4 layers). 
 
+It is worth noting that a vector is not considered as an $1\times m$ matrix in Pytorch. See the following snippet. And if you have ```a.T```, you will get a complain but ```b.T``` will be fine. 
+
+```python
+import torch
+a = torch.arange(6)
+print(a)
+print(a.ndim)
+print(a.shape)
+
+b = a.reshape(2,3).reshape(1, -1)
+print(b)
+print(b.ndim)
+print(b.shape)
+
+#output would be
+#tensor([0, 1, 2, 3, 4, 5])
+#1
+#torch.Size([6])
+#tensor([[0, 1, 2, 3, 4, 5]])
+#2
+#torch.Size([1, 6])
+```
+
+
+
 # Attributes of A Tensor
 
 ```python
