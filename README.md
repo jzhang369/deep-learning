@@ -1,3 +1,9 @@
+# Bookmark
+
+[course](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
+
+12/13/2022 - 1:58:00
+
 # Objective Functions
 
 Objective Functions -> Loss Functions 
@@ -56,7 +62,7 @@ print(f"Zeros Tensor: \n {zeros_tensor} \n")
 
 This program creates three 3D tensors, where each tensor is a 4*3*2 matrix. For interpretation, it is easier, at least for me, to understand the matrix from the lowest dimension (i.e., from 2, to 3, and to 4, meaning 2 columns, 3 rows, and 4 layers). 
 
-It is worth noting that a vector is not considered as an $1\times m$ matrix in Pytorch. See the following snippet. And if you have ```a.T```, you will get a complain but ```b.T``` will be fine. 
+It is worth noting that a vector is not considered as an $1\times m$ matrix in Pytorch. See the following snippet. And if you have ```a.T```, you will get a complain but ```b.T``` will be fine. In addition, if you slice a matrix to one slice (e.g., ```[:,1]```), it will give you a vector; but if you slice it into a submatrix (e.g., ```[:,1:3]```), it will give you a matrix. Weird :confused:
 
 ```python
 import torch
@@ -79,7 +85,13 @@ print(b.shape)
 #torch.Size([1, 6])
 ```
 
+```dtype``` is the data type of a tensor. Here is a [list](https://pytorch.org/docs/stable/tensors.html) of torch data types. Data types are relevant to precision and computing. 
 
+    `The first thing to create a tensor is to decide its type.`
+
+    `Tensor datatypes is one of the 3 big things with PyTorch and deep learning.`
+
+:question: Not sure what it means but hopefully get it addressed later. 
 
 # Attributes of A Tensor
 
