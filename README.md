@@ -2,7 +2,7 @@
 
 [course](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/13/2022 - 1:58:00
+12/13/2022 - 2:15:00
 
 # Objective Functions
 
