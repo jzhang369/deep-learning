@@ -2,7 +2,7 @@
 
 [course](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/13/2022 - 2:15:00
+12/13/2022 - 2:23:00
 
 # Objective Functions
 
@@ -63,6 +63,8 @@ print(f"Zeros Tensor: \n {zeros_tensor} \n")
 This program creates three 3D tensors, where each tensor is a 4*3*2 matrix. For interpretation, it is easier, at least for me, to understand the matrix from the lowest dimension (i.e., from 2, to 3, and to 4, meaning 2 columns, 3 rows, and 4 layers). 
 
 It is worth noting that a vector is not considered as an $1\times m$ matrix in Pytorch. See the following snippet. And if you have ```a.T```, you will get a complain but ```b.T``` will be fine. In addition, if you slice a matrix to one slice (e.g., ```[:,1]```), it will give you a vector; but if you slice it into a submatrix (e.g., ```[:,1:3]```), it will give you a matrix. Weird :confused:
+
+:zap: Remember to give a try on ```squeeze``` and ```unsqueeze```. It will remove and add a dimension. 
 
 ```python
 import torch
