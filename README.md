@@ -121,6 +121,23 @@ print(tensor)
 print(tensor.T) # matrix transpose
 ```
 
+# Reproducbility
+
+PyTorch has a concept of a **random seed**. This is the same to the seed used for a pseudo random number generator. Essentially if you give the same seed, the random number generator will generate the same sequence of random numbers. 
+
+```python
+seed = 42
+torch.manual_seed(seed)
+random_tensor_A = torch.rand(3,4)
+
+torch.manual_seed(seed)
+random_tensor_B = torch.rand(3,4)
+
+print(random_tensor_A == random_tensor_B)
+# you will get True. 
+```
+
+
 
 # Data Preprocessing
 
