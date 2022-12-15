@@ -1,8 +1,9 @@
 # Bookmark
 
-[course](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
+[book](https://www.learnpytorch.io/)
+[video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/13/2022 - 2:23:00
+12/14/2022 - 4:12:00
 
 # Objective Functions
 
@@ -136,6 +137,42 @@ random_tensor_B = torch.rand(3,4)
 print(random_tensor_A == random_tensor_B)
 # you will get True. 
 ```
+
+
+# GPU with colab
+
+Check [Section of Best Practices](https://pytorch.org/docs/stable/notes/cuda.html#best-practices)
+
+
+```bash
+!nvidia-smi
+```
+```python
+import torch
+# Check for GPU access with PyTorch
+torch.cuda.is_available()
+
+# 1. Setup device agnostic code
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+# 2. Count number of devices
+torch.cuda.device_count
+
+# 3. Put tensors and models on the GPU
+tensor = torch.tensor([1,2,3])
+# this tensor is not on GPU
+print(tensor, tensor.device)
+# move tensor to GPU if GPU is available
+tensor_on_gpu = tensor.to(device)
+print(tensor_on_gpu)
+
+
+# if tensor is on GPU, we cannot transfor it to NumPy
+# tensor_on_device.numpy() will fail if it is on GPU.
+tensor_back_on_cpu = tensor_on_gpu.cpu().numpy()
+print(tensor_on_cpu)
+```
+
 
 
 
