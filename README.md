@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 4:12:00
+12/14/2022 - 4:30:00
 
 # Objective Functions
 
@@ -139,7 +139,7 @@ print(random_tensor_A == random_tensor_B)
 ```
 
 
-# GPU with colab
+# GPU with CoLab
 
 Check [Section of Best Practices](https://pytorch.org/docs/stable/notes/cuda.html#best-practices)
 
@@ -199,3 +199,25 @@ print(y)
 
 
 ```
+
+
+# PyTorch Workflow
+
+```python
+import torch
+from torch import nn
+# nn has all building blocks for neural networks in PyTorch. 
+
+import matplotlib.pyplot as plt
+#this is for data visualization.
+
+```
+
+## Data Preparing and Loading
+
+ML has two parts:
++ Map data into a numerical representation. 
++ Build a model to learn patterns from numerical representation. 
+
+
+
