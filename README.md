@@ -219,5 +219,32 @@ ML has two parts:
 + Map data into a numerical representation. 
 + Build a model to learn patterns from numerical representation. 
 
+Split data into training and test sets. 
 
 
+## Build a Neural Network
+
+
+PyTorch model building essentials
+
+* torch.nn - all buildings for neural networks. 
+* torch.nn.Parameter - what parameters should the model try and learn. Could be set through torch.nn layers. 
+* torch.nn.Module - The base class for all neural network modules, if you subclass it, you should overwrite ```forward()```
+* torch.optim - where the optimizers in PyTorch live. They will help with gradient descent. 
+* ```def forward()``` - All nn.Module subclasses require you to overwrite ```forward()```, this method defines what happens in the forward computation. 
+
+
+```python
+from torch import nn
+class LinearRegressionModel(nn.Module): 
+    #almost everything in PyTorch inherhits from nn.Module, which is the base class for all neural networks. 
+    def __init__(self):
+        super().__init__()
+        self.weights = nn.Parameter(torch.randn(1, requires_grad=true, dtype=torch.float))
+        self.bias = nn.Parameter(torch.randn(1,requires_grad=true, dtype=torch.float))
+
+    def froward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.weights * x + self.bias
+
+
+```
