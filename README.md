@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 4:44:00
+12/14/2022 - 5:54:00
 
 # Objective Functions
 
@@ -246,5 +246,57 @@ class LinearRegressionModel(nn.Module):
     def froward(self, x: torch.Tensor) -> torch.Tensor:
         return self.weights * x + self.bias
 
+```
 
+
+```python
+# Create a random seed
+torch.manual_seed(369)
+
+# Initialize an instance of the model
+model = LinearRegressionModel()
+
+# List the internal parameters
+list(model.parameters())
+# or you can use
+model.state_dict()
+```
+
+
+```python
+# Make predictions without training the model so that you can see the initial paramter values do not work. 
+# When the data runs through the model, it runs through the forward() function.
+
+# Runs this directly. 
+y_preds = model(X_test)
+y_preds
+
+# This is a better practice
+# Using torch.inference_mode() to improve the performance. 
+with torch.inference_mode():
+    y_preds = model(X_test)
+y_preds
+```
+
+**Now it is ready to train a model**
+
+One way to measure how well your model/parameters perform is to use a loss function. 
+
+* loss function == cost function == criterion function.
+* A loss function measures how wrong your prediction is against the ground truth data. 
+* Optimizer: Adjust the parameters so that the loss function will yield minimal values.  
+
+Specially, you will also need
+
+* a training loop
+* a testing loop
+
+```python
+# Now to train the model.
+
+# Setup a loss function
+loss_fn = nn.L1Loss() # Using L1Loss and but there are other choices. 
+
+# Setup an optimizer
+optimizer = torch.optim.SGD
 ```
