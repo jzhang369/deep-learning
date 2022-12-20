@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 6:27:00
+12/14/2022 - 7:00:00
 
 # Objective Functions
 
@@ -330,6 +330,8 @@ for epoch in range(epochs):
     # 2. calculate the loss
     loss = loss_fn(y_pred, y_train)
 
+    print(f"Loss: {loss}")
+
     # 3. Optimizer zero grad
     optimizer.zero_grad()
 
@@ -339,5 +341,20 @@ for epoch in range(epochs):
     # 5. Step the optimizer (to perform gradient descent)
     optimizer.step()
 
+
+    print(model.state_dict()) # display the updated parameters for each iteration
+
+
+    # Testing, this is not part for the trainning. 
     model.eval() # turn off gradient tracking, this is the opposite to model.train()
+    with torch.inference_mode():
+        # 1. Do the forward pass
+        test_pred = model(X_test)
+        # 2. Calculate the loss on the testing data
+        test_loss = loss_fn(test_pred, y_test)
+
+    print(f"Epoch: {epoch} | Loss: {loss} | Test loss: {test_loss}")
+
+
+
 ```
