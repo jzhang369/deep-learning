@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 7:26:00
+12/14/2022 - 7:37:00
 
 # Objective Functions
 
@@ -367,7 +367,6 @@ There are three main methods for saving and loading models in PyTorch.
 
 
 ```python
-
 # Saving our PyTorch model
 from pathlib import Path
 
@@ -379,7 +378,22 @@ MODEL_PATH.mkdir(parents = True, exist_ok = True)
 MODEL_NAME = "01_first.pth" # PyTorch usually has pth or pt as the file extension for its saved models.
 MODEL_SAVE_PATH = MODEL_PATH / MODEL_NAME
 
+# 3. Save the model state_dict
+torch.save(obj = model.state_dict(), f = MODEL_SAVE_PATH)
+```
 
+Loading a PyTorch model. 
 
+Since for the previous example, we only saved state_dict rather than the entire model, we will need to create a new instance of our model class and load state_dict() into that. 
 
+```python
+# Instantiate a new instance of our model class
+loaded_model = LinearRegressionModel()
+
+loaded_model.state_dict() # this will display the default parameters. 
+
+# Load the saved state_dict
+loaded_model.load_state_dict(torch.load(f=MODEL_SAVE_PATH))
+
+loaded_model.state_dict() # this will display the loaded parameters.
 ```
