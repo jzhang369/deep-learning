@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 5:54:00
+12/14/2022 - 6:27:00
 
 # Objective Functions
 
@@ -286,10 +286,7 @@ One way to measure how well your model/parameters perform is to use a loss funct
 * A loss function measures how wrong your prediction is against the ground truth data. 
 * Optimizer: Adjust the parameters so that the loss function will yield minimal values.  
 
-Specially, you will also need
 
-* a training loop
-* a testing loop
 
 ```python
 # Now to train the model.
@@ -298,5 +295,49 @@ Specially, you will also need
 loss_fn = nn.L1Loss() # Using L1Loss and but there are other choices. 
 
 # Setup an optimizer
-optimizer = torch.optim.SGD
+# Inside the optimizer, you will often have to set two parameters. 
+#  + params - the model parameters you want to optimize. 
+#  + lr (learning rate)
+optimizer = torch.optim.SGD(params=model.parameters(), lr=0.01) # lr is for the learning rate. 
+
+```
+
+You will also need
+
+* a training loop
+* a testing loop
+
+A couple of things:
+
++ 0. Loop through the data
++ 1. Forward pass to make predictions
++ 2. Calculate the loss
++ 3. Optimizer zero grad (:confused: what is this?)
++ 4. Loss backpropagation
++ 5. Step Optimizer (Gradient descent) to adjust the parameters. 
+
+```python
+epochs = 1
+
+# 0. loop through the data
+for epoch in range(epochs):
+    # set the model to the training mode
+    model.train() # turn on gradient tracking: train mode in PyTorch set all parameters that need to be gradients to be gradients
+
+    # 1. forward pass
+    y_pred = model(X_train)
+
+    # 2. calculate the loss
+    loss = loss_fn(y_pred, y_train)
+
+    # 3. Optimizer zero grad
+    optimizer.zero_grad()
+
+    # 4. Backpropagation
+    loss.backward()
+
+    # 5. Step the optimizer (to perform gradient descent)
+    optimizer.step()
+
+    model.eval() # turn off gradient tracking, this is the opposite to model.train()
 ```
