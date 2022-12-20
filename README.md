@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 7:04:00
+12/14/2022 - 7:26:00
 
 # Objective Functions
 
@@ -354,6 +354,31 @@ for epoch in range(epochs):
         test_loss = loss_fn(test_pred, y_test)
 
     print(f"Epoch: {epoch} | Loss: {loss} | Test loss: {test_loss}")
+
+```
+
+# Save and Load a Model
+
+There are three main methods for saving and loading models in PyTorch. 
+
+1. ```torch.save()``` - save a PyTorch object in Python's *pickle* format. 
+2. ```torch.load()``` - load a saved PyTorch object. 
+3. ```torch.nn.Module.load_state_dict()``` - load a model's saved state dictionary. 
+
+
+```python
+
+# Saving our PyTorch model
+from pathlib import Path
+
+# 1. Create models directory
+MODEL_PATH = Path("models")
+MODEL_PATH.mkdir(parents = True, exist_ok = True) 
+
+# 2. Create model save path
+MODEL_NAME = "01_first.pth" # PyTorch usually has pth or pt as the file extension for its saved models.
+MODEL_SAVE_PATH = MODEL_PATH / MODEL_NAME
+
 
 
 
