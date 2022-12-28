@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 8:30:00
+12/14/2022 - 8:57:00
 
 # Objective Functions
 
@@ -222,7 +222,7 @@ ML has two parts:
 Split data into training and test sets. 
 
 
-## Build a Neural Network
+## Build a Neural Network for Linear Regression
 
 
 PyTorch model building essentials
@@ -278,7 +278,7 @@ with torch.inference_mode():
 y_preds
 ```
 
-**Now it is ready to train a model**
+## Train a Model
 
 One way to measure how well your model/parameters perform is to use a loss function. 
 
@@ -357,7 +357,7 @@ for epoch in range(epochs):
 
 ```
 
-# Save and Load a Model
+## Save and Load a Model
 
 There are three main methods for saving and loading models in PyTorch. 
 
@@ -396,4 +396,24 @@ loaded_model.state_dict() # this will display the default parameters.
 loaded_model.load_state_dict(torch.load(f=MODEL_SAVE_PATH))
 
 loaded_model.state_dict() # this will display the loaded parameters.
+```
+
+
+# Build a Model for Classification
+
+```python
+# Create a Model
+model = nn.Sequential(
+    nn.Linear(in_features = 3, out_features = 100),
+    nn.Linear(in_features = 100, out_features = 100),
+    nn.ReLu(),
+    nn.Linear(in_features = 100, out_features =3)
+)
+
+# Setup a loss function
+loss_fn = nn.BCEWithLogitsLoss() # BCE is for binary crossentropy
+
+# Setup an optimizer
+optimizer = torch.optim.SGD(params=model.parameters(), lr = 0.001)
+
 ```
