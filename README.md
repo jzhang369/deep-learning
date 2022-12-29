@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 8:57:00
+12/14/2022 - 9:05:00
 
 # Objective Functions
 
@@ -415,5 +415,19 @@ loss_fn = nn.BCEWithLogitsLoss() # BCE is for binary crossentropy
 
 # Setup an optimizer
 optimizer = torch.optim.SGD(params=model.parameters(), lr = 0.001)
+
+```
+
+
+```python
+import sklearn
+import pandas as pd
+from sklearn.datasets import make_circles
+n_samples = 1000
+X, y = make_circles(n_samples, noise = 0.3, random_state = 42)
+
+circles = pd.DataFrame("X1" : X[:, 0],
+                        "X2" : X[:, 1], 
+                        "label" : y)
 
 ```
