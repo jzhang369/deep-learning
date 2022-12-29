@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 9:05:00
+12/14/2022 - 9:20:00
 
 # Objective Functions
 
@@ -420,6 +420,7 @@ optimizer = torch.optim.SGD(params=model.parameters(), lr = 0.001)
 
 
 ```python
+# to generate some data
 import sklearn
 import pandas as pd
 from sklearn.datasets import make_circles
@@ -430,4 +431,25 @@ circles = pd.DataFrame("X1" : X[:, 0],
                         "X2" : X[:, 1], 
                         "label" : y)
 
+# to visualize the data.
+import matplotlib.pyplot as plt
+plt.scatter(x=X[:, 0], y = X[:, 1], c=y, cmap = plt.cm.RdYlBu)
+
+# to convert the data into tensors
+# Now X is the numpy arrary with type float64
+type(X)
+X.dtype
+# When we convert the data into torch censors, we also converet the type into float32. If we do not do this, there might be problems later.
+import torch
+X = torch.from_numpy(X).type(torch.float)
+y = torch.from_numpy(y).type(torch.float)
+
+# split the data into training and testing data sets.
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, 
+                                                    y, 
+                                                    test_size=0.2,
+                                                    random_state=42)
+#20% samples for testing. 
 ```
