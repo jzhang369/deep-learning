@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 9:20:00
+12/14/2022 - 9:56:00
 
 # Objective Functions
 
@@ -452,4 +452,36 @@ X_train, X_test, y_train, y_test = train_test_split(X,
                                                     test_size=0.2,
                                                     random_state=42)
 #20% samples for testing. 
+
+
+# Build a model to classify
+import torch
+from torch import nn
+
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+class CircleModelV0(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.layer_1 = nn.Linear(in_features=2, out_features=5)
+        self.layer_2 = nn.Linear(in_features=5, out_features=1)
+
+    def forward(self, x):
+        return self.layer_2(self.layer_1(x))
+
+
+model_0 = CircleModelV0().to(device)
+
+# or you can do
+
+model_0 = nn.Sequential(
+                        nn.Linear(in_feautres = 2, out_features = 5),
+                        nn.Linear(in_features = 5, out_features = 1)
+                        ).to(device)
+
+
+# make predictions
+with torch.inference_mode():
+    untrained_preds = model_0(X_test.to(device))
+
 ```
