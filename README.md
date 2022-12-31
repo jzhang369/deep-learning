@@ -484,4 +484,16 @@ model_0 = nn.Sequential(
 with torch.inference_mode():
     untrained_preds = model_0(X_test.to(device))
 
+# setup loss function and optimizer
+# loss function: binary cross entropy or categorical cross entropy
+
+# loss_fn = nn.BCELoss() #in this case, you will need to require inputs to have gone through the sigmoid activation function priori to input to BCELoss. 
+loss_fn = nn.BCEWithLogitLoss() #This has the sigmoid function built-in. 
+
+optimizer = torch.optim.SGD(params = model_0.parameters(), lr = 0.1)
+
+
+
+
+
 ```
