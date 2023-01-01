@@ -138,6 +138,41 @@ print(random_tensor_A == random_tensor_B)
 # you will get True. 
 ```
 
+# Activitation Functions
+
+Activitation functions are used for two purposes when a nn is built. 
+
+* To make the model non-linear. 
+* To make the output suitable for binary classification and multi-class classification. 
+
+## Non-linearity
+
+This obvious since a linear model is weak on classifying data with complex patterns. So you can just add activitation functions in the hidden layer(s).
+
+## binary/multi-class classification
+
+This is interesting since you will typically use
+
++ ```sigmoid``` for binary classification. 
++ ```softmax``` for multi-class classification. 
+
+But let us get into a little bit more details. 
+
+A activation function in this case is expected to put after the output layer **for modeling the loss**. This function is not necessary to classify one object after the model is trained. Well, I should say that you will still need the ```sigmoid``` function for binary classification since it will map the single output into $(0,1)$. But for multi-class classification, you can only pick up the dimension that gives you the largest value. 
+
+That is why you have to be very careful when you use PyTorch to build a classification model.
+
+### binary classification model
+
++ If the loss function does not have ```sigmoid``` integrated, you can add ```sigmoid``` as another layer in the model. Later, you can directly use the model output. 
++ If the loss function has the ```sigmoid``` integrated, you should not add ```sigmoid``` as another layer in the model. You train the model, but the model output should be processed by a ```sigmoid``` function that helps about the final classification. 
+
+### multiclass classification model
+
++ If the loss function does not have ```softmax``` integrated, you can add ```softmax``` as another layer in the model. Later, you can directly use the model output. 
++ If the loss function has the ```softmax``` integrated, you should not add ```softmax``` as another layer in the model. You train the model, but the model output can be directly used to decide class (i.e., by picking up the dimension with the largest value). 
+
+
 
 # GPU with CoLab
 
@@ -491,9 +526,6 @@ with torch.inference_mode():
 loss_fn = nn.BCEWithLogitLoss() #This has the sigmoid function built-in. 
 
 optimizer = torch.optim.SGD(params = model_0.parameters(), lr = 0.1)
-
-
-
 
 
 ```
