@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 10:31:00
+12/14/2022 - 12:26:00
 
 # Objective Functions
 
@@ -540,8 +540,50 @@ loss_fn = nn.BCEWithLogitLoss()
 
 optimizer = torch.optim.SGD(params = model_0.parameters(), lr = 0.1)
 
+```
 
+```python
+# Notice: This is a flawed model since it is completely linear!!
+# Fit the model
+torch.manual_seed(42)
+epochs = 1000
 
+# Put all data on target device
+X_train, y_train = X_train.to(device), y_train.to(device)
+X_test, y_test = X_test.to(device), y_test.to(device)
 
+for epoch in range(epochs):
+    model_3.train()
+    # 1. Forward pass
+    y_logits = model_3(X_train).squeeze()
+    y_pred = torch.round(torch.sigmoid(y_logits)) # logits -> prediction probabilities -> prediction labels
+    
+    # 2. Calculate loss and accuracy
+    loss = loss_fn(y_logits, y_train) # BCEWithLogitsLoss calculates loss using logits; note here the nput is y_logits, not y_pred. BCEWithLogitsLoss() has the sigmoid built-in so its first input is y_logits rather than y_pred. y_pred is only used for calculating the accuracy (see accuracy_fn) and data display by the developer. 
+    acc = accuracy_fn(y_true=y_train, 
+                      y_pred=y_pred)
+    
+    # 3. Optimizer zero grad
+    optimizer.zero_grad()
 
+    # 4. Loss backward
+    loss.backward()
+
+    # 5. Optimizer step
+    optimizer.step()
+
+    ### Testing
+    model_3.eval()
+    with torch.inference_mode():
+      # 1. Forward pass
+      test_logits = model_3(X_test).squeeze()
+      test_pred = torch.round(torch.sigmoid(test_logits)) # logits -> prediction probabilities -> prediction labels
+      # 2. Calcuate loss and accuracy
+      test_loss = loss_fn(test_logits, y_test)
+      test_acc = accuracy_fn(y_true=y_test,
+                             y_pred=test_pred)
+
+    # Print out what's happening
+    if epoch % 100 == 0:
+        print(f"Epoch: {epoch} | Loss: {loss:.5f}, Accuracy: {acc:.2f}% | Test Loss: {test_loss:.5f}, Test Accuracy: {test_acc:.2f}%")
 ```
