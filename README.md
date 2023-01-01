@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 9:56:00
+12/14/2022 - 10:31:00
 
 # Objective Functions
 
@@ -158,9 +158,11 @@ This is interesting since you will typically use
 
 But let us get into a little bit more details. 
 
-A activation function in this case is expected to put after the output layer **for modeling the loss**. This function is not necessary to classify one object after the model is trained. Well, I should say that you will still need the ```sigmoid``` function for binary classification since it will map the single output into $(0,1)$. But for multi-class classification, you can only pick up the dimension that gives you the largest value. 
+The major purpose of an activation function in this context is **to model the loss**. This function is not necessary to classify one object after the model is trained. In other words, an activation function is a must for the loss function, for both binary classification and multi-class classification. If a loss function does not have the activiation function, you will need to put the activation function into your classification model. 
 
-That is why you have to be very careful when you use PyTorch to build a classification model.
+Well, I should say that you will still need the ```sigmoid``` function for binary classification since it will map the single output into $(0,1)$. But for multi-class classification, you can only pick up the dimension that gives you the largest value. 
+
+That is why you have to be very careful when you use PyTorch to build a classification model. Specifically, **before you add an activation function to your model, you need to first check whether the loss function already has a built-in activation function**. 
 
 ### binary classification model
 
@@ -522,10 +524,24 @@ with torch.inference_mode():
 # setup loss function and optimizer
 # loss function: binary cross entropy or categorical cross entropy
 
-# loss_fn = nn.BCELoss() #in this case, you will need to require inputs to have gone through the sigmoid activation function priori to input to BCELoss. 
-loss_fn = nn.BCEWithLogitLoss() #This has the sigmoid function built-in. 
+# loss_fn = nn.BCELoss() #in this case, you will need to require inputs to have gone through the sigmoid activation function priori to input to BCELoss. i.e., you can put sigmoid as another layer in the model. 
+
+loss_fn = nn.BCEWithLogitLoss() 
+#This has the sigmoid function built-in. 
+#This is why in the model, we will not need the layer of sigmoid. 
+#But later you will need to convert the output into sigmoid for classification. 
+#For example, you will need to convert the output using sigmoid as follows:
+#
+#with torch.inference_mode():
+#    y_logits = model_0(X+test.to(device))
+#y_pred_probs = torch.sigmoid(y_logits)
+#y_pred_labels = torch.round(y_pred_probs) #y_pred_probs >= 0.5, y =1, else, y = 0.
+
 
 optimizer = torch.optim.SGD(params = model_0.parameters(), lr = 0.1)
+
+
+
 
 
 ```
