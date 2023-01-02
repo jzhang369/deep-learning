@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 12:38:00
+12/14/2022 - 13:06:00
 
 # Objective Functions
 
@@ -436,7 +436,7 @@ loaded_model.state_dict() # this will display the loaded parameters.
 ```
 
 
-# Build a Model for Classification
+# Build a Model for Binary Classification
 
 ```python
 # Create a Model
@@ -613,4 +613,67 @@ class CircleModelV2(nn.Module):
 model_3 = CircleModelV2().to(device)
 print(model_3)
 ```
-:question: why relu is not added for the last layer?
+:question: why relu is not added for the last layer? Perhaps activation functions are used for hidden layers for non-linearity? 
+
+
+# Build a Model for Multi-Class Classification
+
+prepare the dataset. 
+
+```python
+import torch
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.model_selection import train_test_split
+
+# set hyperparameters for data creation.
+NUM_CLASSES = 4
+NUM_FEATURES = 2
+RANDOM_SEED = 42
+
+# 1. Create multi-class data
+X_blob, y_blob = make_blobs(n_samples = 1000, 
+                            n_features = NUM_FEATURES,
+                            centers=NUM_CLASSES, 
+                            cluster_std = 1.5, 
+                            random_state=RANDOM_SEED)
+
+
+# 2. Turn data into tensors
+X_blob = torch.from_numpy(X_blob).type(torch.float)
+y_blob = torch.from_numpy(y_blob).type(torch.float)
+
+
+# 3. Split data into training and testing
+X_blob_train, X_blob_test, y_blob_train, y_blob_test = train_test_split(X_blob, y_blob, test_size = 0.2, random_seed = RANDOM_SEED)
+
+
+# 4. Plot data
+plt.figure(figsize=(10, 7))
+plt.scatter(X_blob[:, 0], X_blob[:, 1], c=y_blob, cmap=plt.cm.RdYlBu)
+
+```
+
+build a multi-class classification model in PyTorch
+
+```python
+device = "cuda" if torch.cuda.is_available() else "cpu"
+
+class BlobModel(nn.Module):
+    def __init_(self, input_features, output_features, hidden_units = 8):
+        super().__init__()
+        self.linear_layer_stack = nn.Sequential(
+            nn.Linear(in_features = input_features, out_features = hidden_units), 
+            #nn.ReLU() # Do you need it?
+            nn.Linear(in_features = hidden_units, out_features = hidden_units),
+            #nn.ReLU() # Do you need it?
+            nn.Linear(in_features = hidden_units, out_features = output_features)
+        )
+    
+    def forward(self, x):
+        return self.linear_layer_stack(x)
+
+
+model_4 = BlobModel(input_features = 2, output_features = 4, hidden_units=8).to(device)
+
+```
