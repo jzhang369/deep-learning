@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 13:06:00
+12/14/2022 - 14:00:00
 
 # Objective Functions
 
@@ -641,7 +641,8 @@ X_blob, y_blob = make_blobs(n_samples = 1000,
 
 # 2. Turn data into tensors
 X_blob = torch.from_numpy(X_blob).type(torch.float)
-y_blob = torch.from_numpy(y_blob).type(torch.float)
+y_blob = torch.from_numpy(y_blob).type(torch.LongTensor)
+# Note: the data type!!!
 
 
 # 3. Split data into training and testing
@@ -676,4 +677,61 @@ class BlobModel(nn.Module):
 
 model_4 = BlobModel(input_features = 2, output_features = 4, hidden_units=8).to(device)
 
+# Create a loss function.
+loss_fn = nn.CrossEntropyLoss()
+
+# Create an optimizer for multi-class classification
+optimizer = torch.optim.SGD(params=model_4.parameters(),
+                            lr = 0.1)
+
+
+# Create the training and testing loop
+
+# Fit the model
+torch.manual_seed(42)
+torch.cuda.manual_seed(42)
+
+# Set number of epochs
+epochs = 100
+
+# Put data to target device
+X_blob_train, y_blob_train = X_blob_train.to(device), y_blob_train.to(device)
+X_blob_test, y_blob_test = X_blob_test.to(device), y_blob_test.to(device)
+
+for epoch in range(epochs):
+    ### Training
+    model_4.train()
+
+    # 1. Forward pass
+    y_logits = model_4(X_blob_train) # model outputs raw logits 
+    y_pred = torch.softmax(y_logits, dim=1).argmax(dim=1) # go from logits -> prediction probabilities -> prediction labels
+    # print(y_logits)
+    # 2. Calculate loss and accuracy
+    loss = loss_fn(y_logits, y_blob_train) 
+    acc = accuracy_fn(y_true=y_blob_train,
+                      y_pred=y_pred)
+
+    # 3. Optimizer zero grad
+    optimizer.zero_grad()
+
+    # 4. Loss backwards
+    loss.backward()
+
+    # 5. Optimizer step
+    optimizer.step()
+
+    ### Testing
+    model_4.eval()
+    with torch.inference_mode():
+      # 1. Forward pass
+      test_logits = model_4(X_blob_test)
+      test_pred = torch.softmax(test_logits, dim=1).argmax(dim=1)
+      # 2. Calculate test loss and accuracy
+      test_loss = loss_fn(test_logits, y_blob_test)
+      test_acc = accuracy_fn(y_true=y_blob_test,
+                             y_pred=test_pred)
+
+    # Print out what's happening
+    if epoch % 10 == 0:
+        print(f"Epoch: {epoch} | Loss: {loss:.5f}, Acc: {acc:.2f}% | Test Loss: {test_loss:.5f}, Test Acc: {test_acc:.2f}%") 
 ```
