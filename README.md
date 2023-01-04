@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 14:44:00
+12/14/2022 - 15:39:00
 
 # Objective Functions
 
@@ -754,3 +754,6 @@ Some packages:
 + ```torch.utils.data.DataLoader``` creats a python iterable over a dataset
 
 
+Turn the data into iterables (batches)
++ training data should be turned into batches and shuffled.
++ testing data should be turned into batches but not shuffled. 
