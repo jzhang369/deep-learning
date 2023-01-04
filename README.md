@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 14:00:00
+12/14/2022 - 14:44:00
 
 # Objective Functions
 
@@ -142,8 +142,8 @@ print(random_tensor_A == random_tensor_B)
 
 Activitation functions are used for two purposes when a nn is built. 
 
-* To make the model non-linear. 
-* To make the output suitable for binary classification and multi-class classification. 
+* Activation Functions for Hidden Layers: To make the model non-linear. 
+* Activation Functions for Output Layers: To make the output suitable for binary classification and multi-class classification. 
 
 ## Non-linearity
 
@@ -735,3 +735,22 @@ for epoch in range(epochs):
     if epoch % 10 == 0:
         print(f"Epoch: {epoch} | Loss: {loss:.5f}, Acc: {acc:.2f}% | Test Loss: {test_loss:.5f}, Test Acc: {test_acc:.2f}%") 
 ```
+
+# Build a Model for Computer Vision
+
+
+## Inputs and Outputs Shapes
+
+input: 
++ NHWC - [batch_size, height, width, colour_channels]
++ NCHW - [batch_size, colour_channels, height, width]
+
+Some packages:
+
++ ```torchvision``` is the base domain library for computer vision in PyTorch. 
++ ```torchvision.datasets``` prepares data
++ ```torchvision.transforms``` functions for+  manipulating your vision data to be suitable for use with an ML model
++ ```torch.utils.data.Dataset``` base dataset class for PyTorch
++ ```torch.utils.data.DataLoader``` creats a python iterable over a dataset
+
+
