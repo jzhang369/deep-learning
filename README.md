@@ -3,7 +3,7 @@
 [book](https://www.learnpytorch.io/)
 [video](https://www.youtube.com/watch?v=Z_ikDlimN6A&list=RDCMUCr8O8l5cCX85Oem1d18EezQ&start_radio=1&rv=Z_ikDlimN6A&t=4121)
 
-12/14/2022 - 15:39:00
+12/14/2022 - 15:58:00
 
 # Objective Functions
 
@@ -757,3 +757,21 @@ Some packages:
 Turn the data into iterables (batches)
 + training data should be turned into batches and shuffled.
 + testing data should be turned into batches but not shuffled. 
+
+
+## Create a timer to time out the experiments
+
+```python
+from timeit import default_timer as timer
+def print_train_time(start: float,
+                        end: float,
+                        device: torch.device = None):
+    total_time = end - start
+    print(f"Train time on {device}: {total_time:.3f} seconds")
+    return total_time
+
+start_time = timer()
+# Your code comes here
+end_time = timer()
+print_train_time(start=start_time, end=end_time, device="cpu")
+```
