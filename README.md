@@ -738,6 +738,7 @@ for epoch in range(epochs):
 
 # Build a Model for Computer Vision
 
+(The CNN part was not noted here.)
 
 ## Inputs and Outputs Shapes
 
@@ -775,3 +776,10 @@ start_time = timer()
 end_time = timer()
 print_train_time(start=start_time, end=end_time, device="cpu")
 ```
+## Using Progress Bar
+
+```python
+from tqdm.autom import tqdm
+```
+
+# Customer Datasets
