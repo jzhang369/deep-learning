@@ -783,3 +783,10 @@ from tqdm.autom import tqdm
 ```
 
 # Customer Datasets
+
+
+# Transfer Learning
+
+[video](https://www.youtube.com/watch?v=qD6iD4TFsdQ&list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49&index=28)
+
+20:00
