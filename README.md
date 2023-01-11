@@ -790,3 +790,9 @@ from tqdm.autom import tqdm
 [video](https://www.youtube.com/watch?v=qD6iD4TFsdQ&list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49&index=28)
 
 20:00
+
+
+There are two major benefits of using tranfer learning:
+
++ Can leverage an existing model (usually a neural network architecture) proven to work on problems similar to our own.
++ Can leverage a working model which has already learned patterns on similar data to our own. This often results in achieving great results with less custom data.
