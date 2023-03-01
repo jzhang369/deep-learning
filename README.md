@@ -96,6 +96,10 @@ print(b.shape)
 
 :question: Not sure what it means but hopefully get it addressed later. 
 
+![](https://raw.githubusercontent.com/mrdbourke/pytorch-deep-learning/main/images/00-pytorch-different-tensor-dimensions.png) 
+
+In ```numpy```, you will likely to use axis, which is same compared to the dim here. 
+
 # Attributes of A Tensor
 
 ```python
