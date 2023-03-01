@@ -796,3 +796,8 @@ There are two major benefits of using tranfer learning:
 
 + Can leverage an existing model (usually a neural network architecture) proven to work on problems similar to our own.
 + Can leverage a working model which has already learned patterns on similar data to our own. This often results in achieving great results with less custom data.
+
+
+# RNN
+
+![](https://i.stack.imgur.com/zhVa2.png)
