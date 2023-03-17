@@ -19,14 +19,50 @@ Nevertheless, the machine's eyeballs may think $Y_{monkey}'$ is similar to $Y_{l
 
 *Well, yes since you may generate $X_{monkey}'$ when you know $X_{monkey}$, $X_{lion}$, and $f()$.*
 
+*How?*
+
+*You can use* $X_{monkey}' = min_{X_{monkey}'}(||f(X_{lion}) - f(X_{monkey}')||_2^2 + \beta ||X_{monkey} - X_{monkey}'||_2^2)$. *Since you know know $X_{monkey}$, $X_{lion}$, and $f()$, you can solve this optimization problem using gradient descent.*
+
+
 *But is that a problem?*
 
 ## Poisoning Attacks
 
+Let's say we have some training data, labeled as :monkey_face: and :lion:. 
+
+|$X$|$f(X)$|Label|
+|:---|:---|:---|
+|$X_{monkey,1}$|$Y_{monkey,1}$|monkey|
+|$X_{monkey,2}$|$Y_{monkey,2}$|monkey|
+|...|...|...|
+|$X_{monkey,100}$|$Y_{monkey,100}$|monkey|
+|$X_{lion,1}$|$Y_{lion,1}$|lion|
+|$X_{lion,2}$|$Y_{lion,2}$|lion|
+|...|...|...|
+|$X_{lion,100}$|$Y_{lion,100}$|lion|
+
+Again, the machine (or the classification model) works since the machine's eyeballs can easily draw boundaries among $Y$s for different classes. 
+
+If you have a chance to add some data entries and their labels into the training set. You might add some $X_{monkey}'$s to confuse the machine eyeballs. Say, you add some data like this, where $Y'_{monkey,k}$ is very close to $Y_{lion,j}$. Or you can say you can drive using $X_{monkey,k}' = min_{X_{monkey,k}'}(||f(X_{lion,j}) - f(X_{monkey,k}')||_2^2 + \beta ||X_{monkey,i} - X_{monkey,k}'||_2^2)$, where you pick up a pair of $X_{monkey,i}$ and $X_{lion,j}$. 
+
+|$X$|$f(X)$|Label|
+|:---|:---|:---|
+|$X'_{monkey,1}$|$Y'_{monkey,1}$|monkey|
+|$X'_{monkey,2}$|$Y'_{monkey,2}$|monkey|
+|...|...|...|
+|$X'_{monkey,100}$|$Y'_{monkey,100}$|monkey|
+
+If you hire somebody to sanitize the training data, perhaps he will be OK with the added data and their labels since each $X'_{monkey,k}$ does look like a monkey based on their eyeballs. 
+
+But the machine's eyeballs may see something different: These $Y'_{monkey,k}$ are extremely close to those of $Y_{lion,j}$, which, unfortunately, are labeled differently. Now, it is hard for the machine's eyeballs to draw boundaries among $Y$s for different classes since $Y'_{monkey,k}$, labeled as monkey, are now mixed with $Y_{lion,j}$, labeled as lion. 
+
+Since you generate $X'_{monkey,k}$, you can use the same way to generate $X'_{lion,k}$. 
+
+So when you use the new training data to train a model/machine, hyperthertically the machine's eyeballs have a hard time to draw clear bounderis, thereby having low detection accuracy. 
 
 
 
 
-## Backdorr Attacks
+## Backdoor Attacks
 
 
