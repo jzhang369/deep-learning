@@ -26,7 +26,7 @@ Nevertheless, the machine's eyeballs may think $Y_{monkey}'$ is similar to $Y_{l
 
 *But is that a problem?*
 
-## Poisoning Attacks
+## Poisoning Attacks to Confuse Training
 
 Let's say we have some training data, labeled as :monkey_face: and :lion:. 
 
@@ -62,7 +62,31 @@ So when you use the new training data to train a model/machine, hyperthertically
 
 *But $f()$ will be retrained anyway. What happens if the newly trained classifer can now find patterns to differentiate $Y'_{monkey,k}$* from $Y_{lion}$s?*
 
-*This is a great question. I do not have a provable answer. I guess we can only answer this question experimentally.*
+*This is a great question. I cannot prove it. I guess we can only answer this question experimentally.*
+
+## Targeted Poisoning Attacks
+
+*That is fine if you cannot prove it. Can we leverage this method to confuse the classifer so that it will misclassify a specific lion, say $X_{lion, 100}$ into monkey?* 
+
+*Another great question. Yes and we call it targeted poisoning attacks.*
+
+We can randomly pick up a few monkey inputs ($X_{monkey,1}, \dots, X_{monkey, 10}$). Then for each pair of $X_{monkey,k}$ and $X_{lion,100}$, we will find $X'_{monkey,k}$.
+
+
+$X_{monkey,k}' = min_{X_{monkey,k}'}(||f(X_{lion,100}) - f(X_{monkey,k}')||_2^2 + \beta ||X_{monkey,k} - X_{monkey,k}'||_2^2)$ for each $k \in \{1, 2, \dots, 10\}$. 
+
+Now you can add these $X_{monkey,k}'$ into the training set with label monkey. 
+
+|$X$|Label|
+|:---|:---|
+|$X'_{monkey,1}$|monkey|
+|$X'_{monkey,2}$|monkey|
+|...|...|
+|$X'_{monkey,10}$|monkey|
+
+In the feature space of the machine's eyeballs, $f(X'_{monkey,k})$ are very close to $f(X_{lion,100})$. Or you can imagine $f(X_{lion,100})$ is surrounded by $f(X'_{monkey,1}), \dots, f(X'_{monkey,10})$. Since 10 points, i.e., $f(X'_{monkey,1}), \dots, f(X'_{monkey,10})$, are labeled as monkey and 1 point, i.e., $f(X_{lion,100})$, is labeled as lion, the trained classifer is likely to consider $f(X_{lion,100})$ as an outlier and label this region in the output feature space as monkey. 
+
+It is not easy for human to perform manual sanitization since $X_{monkey,k}'$ does look like $X_{monkey,k}$, i.e., constrained by $||X_{monkey,k} - X_{monkey,k}'||_2^2$. 
 
 
 ## Backdoor Attacks
