@@ -60,7 +60,9 @@ Since you generate $X'_{monkey,k}$, you can use the same way to generate $X'_{li
 
 So when you use the new training data to train a model/machine, hyperthertically the machine's eyeballs have a hard time to draw clear bounderis, thereby having low detection accuracy. 
 
+*But $f()$ will be retrained anyway. What happens if the newly trained classifer can now find patterns to differentiate $Y'_{monkey,k}$* from $Y_{lion}$s?*
 
+*This is a great question. I do not have a provable answer. I guess we can only answer this question experimentally.*
 
 
 ## Backdoor Attacks
