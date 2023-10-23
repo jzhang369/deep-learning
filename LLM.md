@@ -85,6 +85,8 @@ Tuning
 
 ## About Langchain
 
+[Video](https://www.youtube.com/watch?v=aywZrzNaKjs)
+
 Langchain
 
 + An open source framework that allows AI developers to combine LLMs like GPT-4 with external sources of computation and data. 
