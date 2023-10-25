@@ -2,6 +2,9 @@
 
 ## About LLM
 
+![](https://miro.medium.com/v2/resize:fit:720/format:webp/1*RYNNKmmi1ShV7xx76qtXww.png)
+
+
 Objectives:
 
 + Large language models are trained (using large datasets) to solve common language problems like text classification, question answering, document summarization, and text generation. 
