@@ -23,12 +23,6 @@ On a high level, BERT consists of three modules:
 
 
 
-
-
-
-
-
-
 ## BERT Training
 
 BERT is trained using two objectives:
@@ -36,5 +30,27 @@ BERT is trained using two objectives:
 + Two “sentences” are fed as input and the model is trained to predict if one sentence follows the other one or not (next sentence prediction NSP).
 
 
+## BERT Usage : Fine Tuning
+
++ input: a sequence of vectors
++ output: a sequence of vectors
+
+The input and the output have the same size.  
+
+BERT is mainly used by *Fine-Tuning* for *downstream* tasks. 
+
+### Application 1
+
++ Input: sequence
++ Output: class
++ Example: sentiment analysis
+
+![](https://miro.medium.com/v2/resize:fit:720/format:webp/1*nB3Ltz0FuRqORe9lWJMfXA.png)
+
+The linear model (i.e., the logistic regression model) has random initialization; the BERT model is initialized by pre-train. Both the logistic regression model and the BERT model will be trained together. 
 
 
+
+## Progress
+
+[Video, 27:30](https://www.youtube.com/watch?v=gh0hewYkjgo&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J&index=19)
