@@ -47,9 +47,43 @@ BERT is mainly used by *Fine-Tuning* for *downstream* tasks.
 
 ![](https://miro.medium.com/v2/resize:fit:720/format:webp/1*nB3Ltz0FuRqORe9lWJMfXA.png)
 
-The linear model (i.e., the logistic regression model) has random initialization; the BERT model is initialized by pre-train. Both the logistic regression model and the BERT model will be trained together. 
+The linear model (i.e., the logistic regression model, model #2) has random initialization; the BERT model (i.e., model #1) is initialized by pre-train. Both the logistic regression model and the BERT model will be trained together. 
 
 
+### Application 2
+
++ Input: sequence
++ Output: sequence, where len(input) == len(output)
++ Example: POS Tagging
+
+![](https://miro.medium.com/v2/resize:fit:720/format:webp/1*dF1IfTFFlDLwt6VjS8TGow.jpeg)
+
+![](https://classic.d2l.ai/_images/bert-tagging.svg)
+
+### Application 3
+
++ Input: sequence1, seqence2
++ Output: a class (i.e., contradiction, entailment, or neutral)
++ Example: to detect whether sequence1 is the premise of sequence2
+
+[Video, 33:40](https://www.youtube.com/watch?v=gh0hewYkjgo&list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J&index=19)
+
+
+### Application 4
+
+Extraction-Based Question Answering (QA)
+
++ Input: Document = {d1, d2, .., dN}, Query = {q1, q2, ..., qM}
++ Output: {s, e} to integers to indicate the starting and ending index of the answer
+
+Two vectors to be learnt, one is for starting and another one for ending, both of which are radomly initialized. 
+
+[Model](https://youtu.be/gh0hewYkjgo?list=PLJV_el3uVTsMhtt7_Y6sgTHGHp1Vb2P2J&t=2306)
+
+
+### Application 5
+
+Seq2Seq model: the T5 model
 
 ## Progress
 
