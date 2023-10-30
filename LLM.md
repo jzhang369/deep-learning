@@ -5,84 +5,31 @@
 ![](https://miro.medium.com/v2/resize:fit:720/format:webp/1*RYNNKmmi1ShV7xx76qtXww.png)
 
 
-Objectives:
-
-+ Large language models are trained (using large datasets) to solve common language problems like text classification, question answering, document summarization, and text generation. 
-
-+ They can be *tailored* to solve specific problems in different fields like retail, finance, and etc. (using a relative small field dataset). 
 
 
-Features:
-
-+ Large
-    + Large training dataset
-    + Large number of parameters
-+ General Purpose
-    + Capable of solving general problems
-    + Should be directly used instead of being trained
-        + Resource restriction of individual users
-+ Pre-Trained and Fine-Tuned
-    + General models are trained using large dataset
-    + Specific models are tuned based on general models using relative small dataset
-
-Benefits:
-
-+ A single model for different tasks
-+ The fine-tune process requires minimal field data such as few/zero shot
-+ The performance of the model continuously grows when you add more data and parameters
 
 
-Model Examples:
 
-+ LaMDA
-+ PaLM
-+ GPT
-+ etc.
+## Two Different Models
 
-LLM Development v.s. Traditional Development:
-
-+ LLM Development using pre-trained APIs
-    + no ML expertise needed
-    + no training examples needed
-    + no need to train a model
-    + **focus on prompt design**
-+ Traditional ML development
-    + yes ML expertise needed
-    + yes training examples needed
-    + yes need to train a model
-        + data
-        + hardware
-        + time
-    + **focus on minimizing a loss function**
++ BERT: Representation Embedding Model
++ GPT: Generative AI model
 
 
-Prompt Design and Engineering
-
-+ Prompt Design: Prompts involve instructions and context passed to a language model to achieve a desired task.
-+ Prompt Engineering is the practice of developing and optimizing prompts to efficiently use language models for a variety of applications. 
+![](https://media.geeksforgeeks.org/wp-content/uploads/20230321032520/bart1drawio-(2).png)
 
 
-Three Types of LLMs, each needs prompting in a different way
+## Usage of LLM Models
 
-+ Generic (or Raw) Language Models: predict the next word/token given a sequence of words/tokens
-    + I am a -> professor
-+ Instruction Tuned Language Models: predict a response to the instructions 
-    + Summarize a text of X
-    + Generate a poem in the style of X
-    + Give me a list of keywords based on semantic similarity of X
-    + Classify the following text into neutral, negative, or positive
-+ Dialog Tuned Language Models: have a dialog by predicting the next response
-    + Chatbot
+There are two different strategies to use these two types of models, respectively.
 
++ Fine Tuning: By adding heads or [adapters](https://adapterhub.ml/) to BERT. Then the entire model is trained for specific tasks - the BERT model uses pre-trained parameters, but the heads/adapters use random initialized parameters. it is worth noting the heads imply the BERT parameters to be adjusted too, although with only small changes expected. Comparatively, adapaters do not expect the BERT parameters to be changed at all. Therefore, adapters themselves can be trained, removed, and later re-deployed; they are small in size. This fine-tuning strategy also falls into the transfer learning, where you can find more discussion about transfering using BERT [here](https://leemeng.tw/attack_on_bert_transfer_learning_in_nlp.html).
 
-Tuning
++ Prompt Engineering: The model is generative and the prompt will decide what to be generated. 
+    + In-context learning: the prompt offers examples that the next question wants to follow. 
+    + ...
+    + ...
 
-+ The process of adapting a model into a new domain or set of custom use cases by training the model on new data. 
-    + Example: collect training data and tune the LLM for the legal or medical domain. 
-+ Fine Tuning: expensive and not realistic in many cases
-+ Parameter-Efficient Tuning Methods (PETM): methods for tuning an LLM on your own custom data without duplicating the model. 
-    + The base model itself is not altered. 
-    + A small number of add-on layers are tuned, which can be swapped in and out at inference time. 
 
 
 
