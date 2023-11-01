@@ -6,7 +6,9 @@
 
 
 
+## Things Started from Transformers
 
+A seq2seq model that exploits the attention mechanism. 
 
 
 
