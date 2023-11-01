@@ -84,6 +84,21 @@ Tuning
     + A small number of add-on layers are tuned, which can be swapped in and out at inference time. 
 
 
+## ChatGPT Prompt Engineering
+
+Principles of Prompting
++ Write clear and specific instructions.
+    + clear $\neq$ short
++ Give the model time to think. 
+    + Tactic 1: Specify steps to complete a task
+        + Step 1: ...
+        + Step 2: ...
+        + ...
+        + Step N: ...
+    + Tactic 2: Instruct the model to work out its own solution before rushing into a conclusion. 
+
+
+
 ## About Langchain
 
 [Video](https://www.youtube.com/watch?v=aywZrzNaKjs)
