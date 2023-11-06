@@ -19,7 +19,21 @@ Learing-Based Fuzzing
     + LLM4All: TBA
 
 
-## 
+## FUZZ4ALL
+
+Part 1: Generate The Best Prompt
++ user input: any document that describes the fuzzing inputs to be generated such as document of the SUT, example code snippets, or specifications. 
++ autoprompting: distills user input into a concise but informative prompt for fuzzing using a large, state-of-the-art distillation LLM to sample multiple different candidate prompts. 
+    + use a distillation LLM to reduce the given user inputs. 
++ code snippet generation 1: each candidate prompt is passed on to the generation LLM to generate code snippets (i.e., fuzzing inputs).
+    + StarCoder. 
++ prompt selection: select the **best** prompt that produces the highest quality fuzzing inputs. 
+
+Part 2: Generate Fuzzing Inputs
++ code snippet generation 2: using the selected, best prompt to continuously sample teh generation LLM to generate fuzzing inputs. 
++ prompt update: to avoid generating many similar fuzzing inputs, it continuously updates the input prompt in each iteration. Specifically, it selects a previously generated input as an example, which demonstrates the kind of future inputs we want the model to generate. In addition, it also append a generation instruction to the initial prompt. 
++ monitor: check whether the SUT misbehaves such as crashes. 
+
 
 
 
