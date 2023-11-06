@@ -98,6 +98,15 @@ Principles of Prompting
     + Tactic 2: Instruct the model to work out its own solution before rushing into a conclusion. 
 
 
+Prompt engineering is enabled by **in-context learning**, defined as a model's ability to temporarily learn from prompts.
+
+
+## Autopromting
+
+**Autoprompting** is an automatic process that uses LLM gradients to select either **soft** prompts, i.e., continuous vector embeddedings, or **hard** prompts, i.e., natural language text. 
+
+
+
 
 ## About Langchain
 
